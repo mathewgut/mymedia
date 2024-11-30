@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- styles -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'index-authenticated.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="welcome">
+        <h1>Hey, {{ user.username }} :)</h1>
+    </div>
+    <section class="row-container">
+    <div class="row-content-type-text">
+        <h2>Trending movies</h2>
+    </div>
+        <div class="row-content">
+                {% for request_popular_movie in request_popular_movies %}
+                    <div class="row-item">
+                    <form method="GET" action="{% url "result_item" %}">
+                        <button type="submit" id="poster-button" title="{{ request_popular_movie.title }}"><img src="https://image.tmdb.org/t/p/original/{{ request_popular_movie.poster_path }}"></button>
+                        <input type="hidden" value="{{ request_popular_movie.id }}" name="media-id">
+                        <input type="hidden" value="movie" name="media-type">
+                    </form>
+                    </div>
+                {% endfor %}
+
+        </div>
+
+    <div class="row-content-type-text">
+        <h2>Highly rated movies</h2>
+    </div>
+        <div class="row-content">
+                {% for movie in request_high_rating_movies %}
+                    {% if movie.poster_path  %}
+                        {% if movie.overview %}
+                    <div class="row-item">
+                    <form method="GET" action="{% url "result_item" %}">
+                        <button type="submit" id="poster-button" title="{{ movie.title }}"><img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></button>
+                        <input type="hidden" value="{{ movie.id }}" name="media-id">
+                        <input type="hidden" value="movie" name="media-type">
+                    </form>
+                    </div>
+                            {% endif %}
+                    {% endif %}
+                {% endfor %}
+        </div>
+
+        <div class="row-content-type-text">
+        <h2>Trending shows</h2>
+    </div>
+        <div class="row-content">
+                {% for request_popular_show in request_popular_shows %}
+                    {% if request_popular_show.poster_path  %}
+                        {% if request_popular_show.overview %}
+                    <div class="row-item">
+                    <form method="GET" action="{% url "result_item" %}">
+                        <button type="submit" id="poster-button" title="{{ request_popular_show.name }}"><img src="https://image.tmdb.org/t/p/original/{{ request_popular_show.poster_path }}"></button>
+                        <input type="hidden" value="{{ request_popular_show.id }}" name="media-id">
+                        <input type="hidden" value="show" name="media-type">
+                    </form>
+                    </div>
+                            {% endif %}
+                    {% endif %}
+                {% endfor %}
+        </div>
+
+
+     <div class="row-content-type-text">
+        <h2>Highly rated shows</h2>
+    </div>
+        <div class="row-content">
+                {% for show in request_high_rating_shows %}
+                    {% if show.poster_path  %}
+                        {% if show.overview %}
+                    <div class="row-item">
+                    <form method="GET" action="{% url "result_item" %}">
+                        <button type="submit" id="poster-button" title="{{ show.name }}"><img src="https://image.tmdb.org/t/p/original/{{ show.poster_path }}"></button>
+                        <input type="hidden" value="{{ show.id }}" name="media-id">
+                        <input type="hidden" value="show" name="media-type">
+                    </form>
+                    </div>
+                            {% endif %}
+                    {% endif %}
+                {% endfor %}
+        </div>
+
+    </section>
+<footer>
+    <div class="attribution">
+        <h2>Powered by</h2>
+        <a href="https://www.themoviedb.org/" rel="noopener noreferrer">
+            <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"></a>
+    </div>
+</footer>
+</body>
+</html>

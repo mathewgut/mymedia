@@ -1,0 +1,22 @@
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.search {
+    margin-bottom: 0.5em;
+    width: 40vw;
+    height: 3em;
+}
+
+button {
+    max-width: fit-content;
+}
+
+select {
+
+}

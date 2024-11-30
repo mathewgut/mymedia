@@ -1,0 +1,83 @@
+body {
+    height: 100vh;
+}
+
+.welcome {
+    margin-left: 10vw;
+}
+
+footer {
+    margin: 2em;
+}
+
+footer .attribution {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+footer .attribution img {
+    width: 5em;
+}
+
+h2 {
+    margin: 0;
+}
+
+.row-content-type-text {
+    display: flex;
+    justify-content: left;
+    padding: 0 3em;
+}
+
+.row-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    width: 100%;
+    padding: 1em 0;
+
+}
+
+.row-content {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 80vw;
+    width: 90%;
+    gap: 0.5em;
+    padding: 1em;
+    scroll-behavior: smooth;
+    margin: 0 auto;
+}
+
+.row-item {
+    display: flex;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.row-item:hover {
+    transform: scale(1.05);
+}
+
+.row-item img {
+    height: 40vh;
+}
+
+@media (max-width: 768px) {
+    .popular-movie-item img {
+        width: 8em;
+    }
+
+    .popular-movies {
+        gap: 0.3em;
+    }
+}
+
+button {
+    cursor: pointer;
+}

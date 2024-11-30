@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Join</title>
+    <link rel="stylesheet" href="{% static 'join.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'universal-styles.css' %}?{% now "U" %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+     {% include 'navbar.html' %}
+    <form method="post">
+        {% csrf_token %}
+        <section class="join-container">
+            <h2>Join</h2>
+            {{ form }}
+            <button type="submit" id="button-blue">Join</button>
+        </section>
+    </form>
+</body>
+</html>

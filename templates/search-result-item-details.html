@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if media_type == 'show' %}
+        <title>Details - {{ results.name }}</title>
+    {% else %}
+        <title>Details - {{ results.title }}</title>
+    {% endif %}
+    <!-- styles -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'result-item-details.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script src="{% static 'ratingStyleChange.js' %}" defer></script>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <section class="page-container">
+    <div class="item-details-container">
+        <div class="image-container">
+            <div class="image-text">
+            <img src="https://image.tmdb.org/t/p/original/{{ results.backdrop_path }}"/>
+                {% if media_type == 'show' %}
+                    <h2>{{ results.name }}</h2>
+                {% else %}
+                    <h2>{{ results.title }}</h2>
+                {% endif %}
+            <p> Rating: <span id="item-rating">{{ results.vote_average }}</span></p>
+
+            </div>
+
+        </div>
+    <div class="item-details">
+         <div class="item-text">
+             <div class="overview-text">
+                <h4>Overview:</h4>
+                <p>{{ results.overview }}</p>
+             </div>
+             <div class="additional-details">
+        <div class="release-details">
+                 {% if media_type == 'movie' %}
+                     <h5>Initial Release</h5>
+                <p>{{ results.release_date }}</p>
+            {% else %}
+                     <h5>Initial Release</h5>
+                <p>{{ results.first_air_date }}</p>
+            {% endif %}
+        </div>
+        <div class="genre-details">
+            <h5>Genre </h5>
+        <p>
+         {% for genre in results.genre_names %}
+            {{genre}}
+         {% endfor %}
+        </p>
+        </div>
+             {% if media_type == 'movie' %}
+                 <form method="post" action="{% url 'add-like-movie' %}">
+                 {% csrf_token %}
+                 <input type="hidden" name="movie_id" value="{{ media_id }}">
+                 <input type="hidden" name="movie_name" value="{{ results.title }}">
+             {% else %}
+                 <form method="post" action="{% url 'add-like-show' %}">
+                 {% csrf_token %}
+                 <input type="hidden" name="show_id" value="{{ media_id }}">
+                 <input type="hidden" name="show_name" value="{{ results.name }}">
+             {% endif %}
+                <input type="hidden" name="media_type" value="{{ media_type }}">
+                 {% if is_liked %}
+                 <button id="like-button" type="submit"><img src="{% static 'images/heart-shape-liked.png' %}"></button>
+                 {% else %}
+                 <button id="like-button" type="submit"><img src="{% static 'images/heart-shape.png' %}"></button>
+                 {% endif %}
+    </form>
+         </div>
+    </div>
+    </div>
+</section>
+</body>
+</html>

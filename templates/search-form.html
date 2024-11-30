@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <!-- styles -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'search-form.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script src="{% static 'searchFilters.js' %}" defer></script>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {%  csrf_token %}
+    <form class="search-form" method="GET" action="{% url "search_results" %}" >
+        <div class="search-container">
+            <h2 id="search-header">What're we looking for?</h2>
+            <input id="search-bar" class="search" type="search" name="query" placeholder="Search...">
+            <div class="button-container">
+                <button id="button-pink" type="submit"> Search </button>
+                <select name="media-type" id="media-type">
+                  <option value="movie">Movies</option>
+                  <option value="show">TV Shows</option>
+                  <option value="Music">Music</option>
+                </select>
+            </div>
+            </select>
+        </div>
+    </form>
+</body>
+</html>

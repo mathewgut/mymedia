@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <!-- styles -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'profile.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="page-container">
+        <section class="profile-container">
+        <div class="profile-info">
+            <img src="{{ user.profile.photo.url }}">
+            <div class="profile-info-text">
+                <h2> {{ user.get_username }} </h2>
+                <p>{{ user.profile.bio}}</p>
+            </div>
+        </div>
+
+        <div class="favourite-stats">
+            <h2>Movies</h2>
+            <p>
+            {% for movie in liked_movies %}
+                <a href="/results/item/?media-id={{ movie.movieID }}&media-type=movie">({{ movie }})</a>
+            {% endfor %}
+            </p>
+
+            <h2>Shows</h2>
+            <p>
+            {% for show in liked_shows %}
+                <a href="/results/item/?media-id={{ show.showID }}&media-type=show">({{ show }})</a>
+            {% endfor %}
+            </p>
+        </div>
+        <div class="button-container">
+            <a href="{% url "profile-edit" %} "><button id="button-pink">Edit Profile</button></a>
+            <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="button-pink">Logout</button>
+            </form>
+        </div>
+
+
+        </section>
+    </div>
+</body>
+</html>

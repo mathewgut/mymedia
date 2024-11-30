@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- styles -->
+    <!-- append "?{% now "U" %}" to styles href so css reloads on refresh  -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'index.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <!-- tagline animation -->
+    <script src="{% static 'tagline-animation.js' %}" defer></script>
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="hero-container">
+        <h1> My <span id="key-word">Media</span> </h1>
+            {% if user.is_authenticated %}
+                <h2> Welcome, {{ user.get_username }} </h2>
+                <!-- log out needs to be a form because csrf_token -->
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="button-pink">Logout</button>
+                </form>
+            {%else%}
+                <p>Log in to get started</p>
+                <!-- wrap anchor around button so user can click entire button -->
+                <div class="button-container">
+                    <a href="{% url 'login' %}" > <button id="button-pink">Login</button></a>
+                    <a href="{% url 'join' %}" > <button id="button-blue">Join</button></a>
+                </div>
+            {%endif%}
+    </div>
+</body>
+</html>

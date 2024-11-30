@@ -1,0 +1,1 @@
+# the purpose of this app is to build the core search feature of the site

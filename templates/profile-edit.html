@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile - {{ user.username }}</title>
+    <!-- styles -->
+    <link rel="stylesheet" type='text/css' href="{% static 'universal-styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'profile-edit.css' %}?{% now "U" %} ">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'navbar.html' %}
+{% block content %}
+    <div class="image-container">
+        <img src="{{ user.profile.photo.url }} " style="cursor: pointer;"/>
+        <h3>Me</h3>
+
+    </div>
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="edit-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <section class="section-1">
+                {{ user_form.username }}
+                {{ user_form.email }}
+            </section>
+
+            <section class="section-2">
+                {{ profile_form.photo }}
+                <h4>Bio</h4>
+            {{ profile_form.bio }}
+                <h4> Favourite Genres: </h4>
+                <h5>Movie</h5>
+            {{ profile_form.movieGenre }}
+
+            <h5>TV</h5>
+            {{ profile_form.showGenre }}
+
+                <h5>Music</h5>
+            {{ profile_form.musicGenre }}
+            </section>
+
+            <div class="button-container">
+                <button type="submit" id="button-blue" class="btn btn-dark btn-lg">Save Changes</button>
+                <button type="reset" id="button-blue">Revert</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+</body>
+</html>
