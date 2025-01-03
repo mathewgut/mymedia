@@ -88,7 +88,7 @@ SPOTIPY_CLIENT_SECRET='xxxxxx'
 
 SPOTIPY_REDIRECT_URI='xxxxxx'
 ```
-h5>TMDB Key</h5>
+<h5>TMDB Key</h5>
 
 To acquire your TMDB api key, go to the link and follow the given steps.
 1. TMDB ([API Key Setup](https://developer.themoviedb.org/docs/getting-started))<br>
