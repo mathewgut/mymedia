@@ -80,6 +80,27 @@ the documentation for both API wrappers explain how to do so:
 
 If you don't want to refactor this whole project, create a new file in the <b>ROOT</b> directory called "api_keys.py".
 
+Copy the following code block into your "api_keys.py" file:
+```
+tmdb_key = 'xxxxxx'
+SPOTIPY_CLIENT_ID='xxxxxx'
+SPOTIPY_CLIENT_SECRET='xxxxxx'
+
+SPOTIPY_REDIRECT_URI='xxxxxx'
+```
+h5>TMDB Key</h5>
+
+To acquire your TMDB api key, go to the link and follow the given steps.
+1. TMDB ([API Key Setup](https://developer.themoviedb.org/docs/getting-started))<br>
+    * Used for all sources of Movie and TV assets and their data
+
+After creating an account and gaining API access, you should see two keys.
+You are going to copy the <b>API Key</b> and paste it into your "api_keys.py" file we created and paste the key in the 
+"<b>tmdb_key</b>" variable value.
+Wow, look at you go!
+
+<br>![getting tdmb api key](readme_assets/tmdb-api-key-get.png)<br>
+
 <b>The next steps show you how to create a Spotify app to use the music features of the site</b>
 
 Firstly, create a spotify account [here](https://www.spotify.com/us/signup) <i>if you don't have one already</i>. Now using your
